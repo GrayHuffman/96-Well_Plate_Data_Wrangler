@@ -1,0 +1,34 @@
+---
+title: "96-Well_Plate_Data_Wrangler"
+author: "Gray Huffman"
+date: "August 23, 2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 96-Well Plate Data Wrangler
+
+```{r}
+#Make sure to install there packages prior to running the script
+require(readxl)
+require(openxlsx)
+require(reshape2)
+
+# Importing the data file (Specify your file path here)
+wellPlate <- read_xlsx('C:/.../test data.xlsx')
+#Removing first row, last column
+wellPlate <- wellPlate[-1,c(-1,-14)]
+colnames(wellPlate) <- c('samp1','samp2','samp3','samp4','samp5','samp6','samp7','samp8','samp9','samp10','samp11','samp12')
+# Melting the original data frame (r-speak for stacking the columns)
+wellPlate.m <- melt(wellPlate)
+wellPlate.m$sample <- c(1:96)
+
+# Exporting the new data arrangement (Specify your preferred location and file name)
+write.table(wellPlate.m, "C:/.../testCombination.txt", sep="\t", row.names = FALSE)
+
+```
+
+
