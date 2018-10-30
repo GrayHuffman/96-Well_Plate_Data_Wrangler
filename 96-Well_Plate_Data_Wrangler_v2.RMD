@@ -14,7 +14,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 #Make sure to install there packages prior to running the script
 require(readxl)
-require(openxlsx)
 require(reshape2)
 
 # Importing the data file (Specify your file path here)
